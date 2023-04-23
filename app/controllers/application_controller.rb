@@ -1,12 +1,35 @@
 class ApplicationController < ActionController::Base
-    before_action :authenticate_user
-    include ActionController::Cookies
+    include ActionController::Cookies   
+    rescue_from ActiveRecord::RecordNotFound, with: :no_route
+    rescue_from ActiveRecord::RecordInvalid, with: :invalid_error
+    before_action :authorized!
+    wrap_parameters format: []
 
+    private
 
     def current_user
-        User.find_by(id: session[:user_id])
+        @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     end
-    def authenticate_user
+
+    def authorized!
         no_route unless current_user
     end
+
+    def no_route
+        render json: { error: "Not authorized" }, status: :unauthorized unless session.include?(:user_id)
+    end
+    
+    def invalid_error(invalid)
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+    end
+    # before_action :authenticate_user
+    # include ActionController::Cookies
+
+
+    # def current_user
+    #     User.find_by(id: session[:user_id])
+    # end
+    # def authenticate_user
+    #     no_route unless current_user
+    # end
 end
