@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+    skip_before_action :authorized!, only: [:create, :index]
     def index
         @movies = Movie.all
         render json: @movies
