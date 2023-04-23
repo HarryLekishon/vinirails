@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
     skip_before_action :verify_authenticity_token
-    
-    skip_before_action :authenticate_user, only: [:create, :show]
+    skip_before_action :authorized!, only: [:create, :show]
+    # skip_before_action :authenticate_user, only: [:create, :show]
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def create

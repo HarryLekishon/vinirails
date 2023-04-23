@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token
-    skip_before_action :authenticate_user, only: [:index, :create, :show, :destroy]
+    skip_before_action :authorized!, only: [:create, :index]
+    # skip_before_action :authenticate_user, only: [:index, :create, :show, :destroy]
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   
@@ -14,8 +15,8 @@ class UsersController < ApplicationController
             if user.valid?
               session[:user_id] = user.id 
               render json: user, status: :created
-            rescue ActiveRecord::RecordInvalid => e
-              render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+            # rescue ActiveRecord::RecordInvalid => e
+            #   render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
             else
               render json: user.errors.full_messages, status: :unprocessable_entity
             end
