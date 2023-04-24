@@ -84,3 +84,49 @@ production:
   database: tmdb_final_backend_production
   username: tmdb_final_backend
   password: <%= ENV["TMDB_MFINAL_BACKEND_DATABASE_PASSWORD"] %>
+
+
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   host: localhost
+#   username: <%= ENV['POSTGRES_USERNAME'] %>
+#   password: <%= ENV['POSTGRES_PASSWORD'] %>
+
+# development:
+#   <<: *default
+#   database: tmdb_development
+
+# test:
+#   <<: *default
+#   database: tmdb_backend_test
+
+# production:
+#   <<: *default
+#   database: tmdb_production
+#   username: <%= ENV['POSTGRES_USERNAME'] %>
+#   password: <%= ENV['POSTGRES_PASSWORD'] %>
+
+
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: 5
+#   host: localhost
+#   username: vinnie
+#   password: golden@254Kim
+
+# development:
+#   <<: *default
+#   database: tmdb_development
+
+# test:
+#   <<: *default
+#   database: tmdb_backend_test
+
+# production:
+#   <<: *default
+#   database: tmdb_production
+#   username: vinnie
+#   password: golden@254Kim
