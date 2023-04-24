@@ -1,6 +1,5 @@
 databases:
   - name: postgress
-  ipAllowList: []
     databaseName: tmdbbackend
     user: vinnie
 
