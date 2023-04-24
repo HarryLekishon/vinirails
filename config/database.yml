@@ -81,7 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: tmdb_final_backend_production
+  url: <%= ENV["APP_DATABASE_URL"] %>
   username: vinnie
   password: <%= ENV["TMDB_MFINAL_BACKEND_DATABASE_PASSWORD"] %>
 
